@@ -1,0 +1,48 @@
+import java.util.Scanner;
+import java.io.*;
+
+public class J01013 
+{
+    private static int[] primes;
+    public static void ptnt()
+    {
+        int numbers = 2000009;
+        primes = new int[numbers];
+        for(int i=1;i<=numbers-9;i++)
+        {
+            primes[i] = 0;
+            boolean ok = false;
+            for(int j=2;j<=(int) Math.sqrt(i);j++)
+            {
+                if(i%j==0)
+                {
+                    primes[i] = primes[j] + primes[i/j];
+                    ok = true;
+                    break;
+                }
+            }
+            if(!ok)
+            {
+                primes[i] = i;
+            }
+        }
+    }
+    public static void main(String[] args) 
+    {
+       
+       Scanner sc = new Scanner(System.in);
+       int test = sc.nextInt();
+       long ans=0;
+       ptnt();
+       while(test>0)
+       {
+           test-=1;
+           int n = sc.nextInt();
+           ans = (Long) (ans + primes[n]);
+       }
+       System.out.println(ans);
+       sc.close();
+    }
+    
+   
+}
