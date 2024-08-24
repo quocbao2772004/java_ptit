@@ -1,0 +1,48 @@
+import java.util.*;
+import java.io.*;
+public class J01008 
+{
+    static String Prime_Factorization(int n)
+    {
+        Vector<String>vt=new Vector<>();
+        for(int i=2;i<=Math.sqrt(n);i++)
+        {
+            if(n%i==0)
+            {
+                int a = i, count=0;
+                while(n%i==0)
+                {
+                    n/=i;
+                    count+=1;
+
+                }
+                String x=String.valueOf(a)+"("+String.valueOf(count)+")";
+                vt.add(x);
+            }
+            
+        }
+        if(n>1)
+        {
+            vt.add(String.valueOf(n)+"(1)");
+        }
+        String res="";
+        for(String i: vt)
+        {
+            res = res+i+" ";
+        }
+        return res;
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int test=sc.nextInt();
+        for(int i=1;i<=test;i++)
+        {
+            int n = sc.nextInt();
+            System.out.printf("Test %d: %s\n",i,Prime_Factorization(n));
+        }
+        
+        
+    }
+    
+}
