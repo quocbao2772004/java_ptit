@@ -1,0 +1,59 @@
+import java.util.Scanner;
+import java.io.*;
+//Số 0 cắt đôi vẫn ra số 0
+//Số 1 cắt đôi vẫn ra số 1
+//Số 8 cắt đôi ra số 0
+//Số 9 cắt đôi ra số 0
+//Các số khác cắt đôi sẽ không hợp lệ.
+public class J01010 
+{
+    public static String cut_in_half(char n)
+    {
+        if(n=='0' || n == '8' || n == '9') return "0";
+        if(n == '1') return "1";
+        return "-1";
+    }
+     
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        
+        int test = sc.nextInt();
+        String x="";
+        while(test-->0)
+        {
+            x="";
+            int ok=1;
+            String s = sc.next();
+            for(int i=0;i<=s.length()-1;i++)
+            {
+                char c = s.charAt(i);
+                if(!cut_in_half(c).equals("-1"))
+                {
+                    x=x+cut_in_half(c);
+                    
+                }
+                else
+                {
+                    ok=0;
+                    break;
+                }
+            }
+            if(ok==0)
+            {
+                System.out.println("INVALID");
+            }
+            else
+            {
+                x=x.replaceFirst("^0+", "");
+                if(x.equals(""))
+                    System.out.println("INVALID");
+                else
+                System.out.println(x);
+            }
+            
+        }
+        
+    }
+    
+}
