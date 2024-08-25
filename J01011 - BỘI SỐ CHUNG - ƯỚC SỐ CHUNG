@@ -1,0 +1,20 @@
+import java.math.*;
+import java.util.Scanner;
+public class J01011 {
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int test = sc.nextInt();
+        while(test-->0)
+        {
+            int a = sc.nextInt(), b = sc.nextInt();
+            BigInteger a1= BigInteger.valueOf(a);
+            BigInteger b1 = BigInteger.valueOf(b);
+            BigInteger gcd = a1.gcd(b1);
+            BigInteger lcm = (a1.multiply(b1)).divide(gcd);      
+            System.out.printf("% d %d\n", lcm, gcd);
+
+        }
+        sc.close();
+    }
+}
