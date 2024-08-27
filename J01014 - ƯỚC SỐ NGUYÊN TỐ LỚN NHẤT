@@ -1,0 +1,36 @@
+import java.util.Scanner;
+public class J01014 
+{
+    static boolean is_prime(long n)
+    {
+        for(int i=2;i<=Math.sqrt(n);i++)
+        if(n%i==0)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static void main(String[] args) 
+    {
+        Scanner sc = new Scanner(System.in);
+        int test = sc.nextInt();
+        while(test-->0)
+        {
+            long n = sc.nextLong();
+            long ma=0;
+            if(is_prime(n))ma=n;
+            else
+            {
+                for(long i=(long) Math.sqrt(n);i>=2;i--)
+                {
+                    if(n%i==0)
+                    {
+                        if(is_prime(i))ma=Math.max(ma,i);
+                        if(i!=n/i && is_prime(n/i))ma=Math.max(ma,n/i);
+                    }
+                }
+            }
+            System.out.println(ma);
+        }
+    }
+}
