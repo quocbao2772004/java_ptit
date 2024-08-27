@@ -1,0 +1,36 @@
+import java.util.Scanner;
+
+public class solienke {
+    public static void main(String[] args)
+    {
+       Scanner sc = new Scanner(System.in);
+       int test = sc.nextInt();
+       while(test>0)
+       {
+        test-=1;
+            boolean ok=true;
+           String s= sc.next();
+           int c =(int)s.charAt(0);
+           for(int i=1;i<=s.length()-1;i++)
+              {
+                 int x=(int)(s.charAt(i));
+                 if(Math.abs((int)(c)-x)!=1)
+                 {
+                     ok=false;
+                     break;
+                 }
+                 c=x;
+              }
+            if(ok==true)
+            {
+                System.out.println("YES");
+            }
+            else
+            {
+                System.out.println("NO");
+            }
+
+       }
+       
+    }
+}
