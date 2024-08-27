@@ -1,0 +1,32 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+
+public class J01021 
+{
+    static long mod = 1000000007;
+    static long power(long a, long b)
+    {
+        if(b == 0)return 1; 
+        if(b == 1)return a;
+        long p1 = power(a, b / 2) % mod;
+        if(b % 2 == 0) return (p1 * p1) % mod ;
+        else return (((p1 * p1) % mod) * (a % mod)) % mod ;
+    }
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/J01021/src/J01021.txt"));
+        Scanner sc = new Scanner(System.in);
+        while(true)
+        {
+            long a = sc.nextLong(), b = sc.nextLong();
+            if(a == 0 && b == 0)
+            {
+                break;
+            }
+            System.out.println(power(a, b));
+        }
+        sc.close();
+    }
+    
+}
