@@ -1,0 +1,58 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
+public class Array 
+{
+    public static void main(String[] args) 
+    {
+       Scanner sc = new Scanner(System.in);
+       List<String> list = new ArrayList <>();
+       list.add("Apple");
+       list.add("banana");
+       list.add("Orange");
+       // C1 for each
+       for(String i:list)
+       {
+           System.out.println(i);
+       }
+       // C2 for
+       for(int i = 0; i < list.size(); i++)
+       {
+           System.out.println(list.get(i));
+       }
+       // C3 Iterator
+       Iterator<String> iter = list.iterator();
+       while(iter.hasNext())
+       {
+           String i = iter.next();
+           System.out.println(i);
+       }
+       // C4 ListIterator
+       ListIterator<String> listIter = list.listIterator();
+       while(listIter.hasNext())
+       {
+           String i = listIter.next();
+           System.out.println(i);
+       }
+        System.out.println("");
+       while(listIter.hasPrevious())
+       {
+           String i = listIter.previous();
+           System.out.println(i);
+       }
+       // C5 Enumeration -> Vector/ Hastable
+       System.out.println("");
+       Vector<String> vec = new Vector<>();
+       vec.add("Apple");
+       vec.add("banana");
+       vec.add("Orange");
+       Enumeration<String> enumer = vec.elements();
+       while(enumer.hasMoreElements())
+       {
+           System.out.println(enumer.nextElement());
+       }
+       System.out.println("");
+       // C6 Stream API(Java 8+)
+       list.stream().forEach(System.out::println);
+    }
+}
