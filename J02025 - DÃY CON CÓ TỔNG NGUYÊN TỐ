@@ -1,0 +1,74 @@
+
+import java.util.*;
+public class J02025
+{
+    public static Scanner sc = new Scanner(System.in);
+    static boolean OK = true;
+    public static void test()
+    {
+        byte n = sc.nextByte();
+        Byte[] a = new Byte[n];
+        for (byte i =0; i< n; i++)
+        {
+            a[i] = sc.nextByte();
+        }
+        Arrays.sort(a, Collections.reverseOrder());
+        Byte x[] = new Byte[20];
+        Try(x,0,n,a);
+        
+    }
+    
+    public static void Try(Byte[] X, int i, int n, Byte[] a)
+    {
+        
+        for(byte j = 0;j<=1;j++)
+        {
+            X[i]=j;
+            if(i==n-1)
+            {
+                int sum=0;
+                for(byte k=0;k<n;k++)
+                {
+                    if(X[k]==1)
+                    {
+                        sum+=a[k];
+                    }
+                }
+                if(checkNT(sum))
+                {
+                    for(byte k=0;k<n;k++)
+                    {
+                        if(X[k]==1)
+                        System.out.print(a[k]+" ");
+                    }
+                    System.out.println("");
+                }
+            }
+            else
+            {
+                Try(X, i+1, n, a);
+            }
+        }
+    }
+    private static boolean checkNT(int sum) 
+    {
+        if (sum < 2) return false;
+        for (int i =2; i<= Math.sqrt(sum); i++)
+        {
+            if (sum % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public static void main(String args[])
+    {
+        int n = sc.nextInt();
+        while (n-- > 0)
+        {
+            OK = true;
+            test();
+        }
+    }
+}
