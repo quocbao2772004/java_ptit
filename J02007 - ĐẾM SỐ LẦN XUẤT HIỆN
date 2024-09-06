@@ -1,0 +1,32 @@
+import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+public class Hihi 
+{
+    public static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+//        Scanner sc = new Scanner(new File("/media/quoc-bao/New Volume/code visual studio/java/hihi/src/hihi.txt"));
+        int test = sc.nextInt();
+        for(int j=1;j<=test;j++)
+        {
+            System.out.printf("Test %d:\n", j);
+            int n = sc.nextInt();
+            Map<Integer, Integer> mp = new LinkedHashMap<>();
+
+            for(int i=1;i<=n;i++)
+            {
+                int x = sc.nextInt();
+                mp.put(x, mp.getOrDefault(x,0)+1);
+                
+            }
+            
+            for(Map.Entry<Integer, Integer> e: mp.entrySet())
+            {
+                System.out.printf("%d xuat hien %d lan\n", e.getKey(), e.getValue());
+            }
+        }
+        sc.close();
+    }
+}
