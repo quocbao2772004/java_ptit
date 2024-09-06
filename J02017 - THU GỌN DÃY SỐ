@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.util.Stack;
+import java.util.Vector;
+public class Array 
+{
+    public static void main(String[] args) 
+    {
+       Scanner sc = new Scanner(System.in);
+       int n = sc.nextInt();
+//       Stack<Integer> st = new Stack <> ();       
+//       for(int i=1;i<=n;i++)
+//       {
+//           int x = sc.nextInt();
+//           if(!st.empty() && (x+ st.peek())% 2 == 0) st.pop();
+//           else
+//           {
+//               st.push(x);
+//           }
+//       }
+//       System.out.println(st.size());
+        Vector<Integer> v =new Vector <>();
+        for(int i = 1; i <=n; i++)
+        {
+            v.add(sc.nextInt());
+        }
+        int i=0;
+        while(i < v.size() - 1)
+        {
+            if((v.get(i) + v.get(i+1))%2==0)
+            {
+                v.remove(i);
+                v.remove(i);
+                if(i>0)i--;
+            }
+            else i+=1;
+        }
+        System.out.println(v.size());
+    }
+}
