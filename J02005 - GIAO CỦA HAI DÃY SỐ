@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
+public class Array 
+{
+    public static void main(String[] args) 
+    {
+       Scanner sc = new Scanner(System.in);
+       int n =sc.nextInt();
+       int m = sc.nextInt();
+       ArrayList<Integer> a = new ArrayList<Integer>();
+       for(int i=1;i<=n;i++)
+       {
+           a.add(sc.nextInt());
+       }
+       ArrayList<Integer> b = new ArrayList<Integer>();
+       for(int i=1;i<=m;i++)
+       {
+           b.add(sc.nextInt());
+       }
+       Set<Integer> setA = a.stream().collect(Collectors.toSet());
+       Set<Integer> setB = b.stream().collect(Collectors.toSet());
+       setA.retainAll(setB);
+       TreeSet<Integer> treeSet = new TreeSet<>(setA);  
+       for(int i: treeSet)
+       {
+           System.out.print(i + " ");
+       }
+    }
+}
