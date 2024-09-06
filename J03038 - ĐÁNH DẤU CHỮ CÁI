@@ -1,0 +1,22 @@
+import java.util.Scanner;
+public class main
+{
+    public static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) 
+    {
+        String s = sc.nextLine();
+        boolean[] dd= new boolean[26];
+        int c=0;
+        for(int i=0;i<=s.length()-1;i++)
+        {
+            if(dd[s.charAt(i)-'a']==false)
+            {
+                c++;
+                dd[s.charAt(i)-'a']=true;
+            }
+        }
+        System.out.println(c);
+    }
+        
+}
