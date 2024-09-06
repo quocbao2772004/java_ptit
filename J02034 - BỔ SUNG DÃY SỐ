@@ -1,0 +1,34 @@
+import java.util.Scanner;
+public class Array 
+{
+    public static void main(String[] args) 
+    {
+       Scanner sc = new Scanner(System.in);
+       int n = sc.nextInt();
+       int[] a = new int[n+1];
+      
+       for(int i=1;i<=n;i++)
+       {
+           a[i] = sc.nextInt();
+           
+       }
+       int ma = a[n];boolean ok=true;
+       int j=1;
+       for(int i=1;i<=ma;i++)
+       {
+           if(j <= n && i == a[j])
+           {
+               j++;
+           }
+           else
+           {
+               System.out.println(i);
+               ok = false;
+           }
+       }
+       if(ok==true)
+       {
+           System.out.println("Excellent!");
+       }
+    }
+}
