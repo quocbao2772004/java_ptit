@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+public class Hihii 
+{   
+    public static Scanner sc = new Scanner(System.in);
+    public static long [] l = new long[105];
+    public static long gcd_a_b(long a, long b)
+    {
+        if(b==0)return a;
+        return gcd_a_b(b,a%b);
+    }
+    public static long lcm_a_b(long a, long b)
+    {
+        return a/gcd_a_b(a, b)*b;
+    }
+    public static void cal_lcm(long n)
+    {
+        l[1]=1;
+        l[2]=2;
+        l[3]=6;
+        for(int i=4;i<=n;i++)
+        {
+            l[i]=lcm_a_b(l[i-1],(long)i);
+        }
+    }
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        long test = sc.nextInt();
+        cal_lcm(100);
+        while(test-->0)
+        {
+            int n = sc.nextInt();
+            System.out.println(l[n]);
+        }
+    }
+    
+}
