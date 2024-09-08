@@ -1,0 +1,35 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+public class Hihii 
+{   
+    public static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+       // Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        int test = sc.nextInt();
+        sc.nextLine();
+        while(test --> 0)
+        {
+            String name = sc.nextLine();
+            name = name.replaceAll("\\s+", " ");
+            name = name.trim();
+            name = name.toLowerCase();
+            String[] word = name.split("\\s");
+            for(int j = 1; j<= word.length - 1;j++)
+            {
+                String i = word[j];
+                String x = i.substring(0,1);
+                x = x.toUpperCase();
+                String c = x + i.substring(1,i.length()) ;
+                System.out.print(c);
+                if(j == word.length - 1)System.out.print(", ");
+                else System.out.print(" ");
+            }
+            System.out.println(word[0].toUpperCase());
+        }
+        
+    }
+    
+}
