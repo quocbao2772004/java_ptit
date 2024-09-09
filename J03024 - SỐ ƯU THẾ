@@ -1,0 +1,57 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+import java.math.*;
+
+public class Main 
+{
+    public static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        int test = sc.nextInt();
+        while(test --> 0)
+        {
+            String s = sc.next();
+            if(is_a_valid_integer(s))
+            {
+                if(is_a_dominant_number(s))
+                {
+                    System.out.println("YES");
+                }
+                else
+                    System.out.println("NO");
+            }
+            else
+                System.out.println("INVALID");
+               
+            
+        }
+        
+    }
+    public static boolean is_a_valid_integer(String s)
+    {
+        for(int i=0;i<=s.length()-1;i++)
+        {
+            
+            if(s.charAt(i) < '0' || s.charAt(i) > '9') return false;
+        }
+        return true;
+    }
+    public static boolean is_a_dominant_number(String s)
+    {
+        int count_odd = 0;
+        for(int i=0; i<=s.length()-1; i++)
+        {
+            if((s.charAt(i)-'0') % 2 == 1) count_odd += 1;
+        }
+        int count_even = s.length() - count_odd;
+        if(count_even > count_odd && s.length() % 2 == 0) return true;
+        if(count_even < count_odd && s.length() % 2 == 1) return true;
+        return false;
+    }
+    
+    
+}
