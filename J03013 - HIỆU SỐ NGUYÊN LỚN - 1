@@ -1,0 +1,28 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+import java.math.*;
+public class Main 
+{
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        int test = sc.nextInt();
+        
+        while(test --> 0)
+        {
+            BigInteger a = sc.nextBigInteger(), b = sc.nextBigInteger();
+            String ans  = a.subtract(b).abs().toString();
+            int max_length = Math.max(a.toString().length(), b.toString().length());
+            while(ans.length()<max_length)
+            {
+                ans = "0" + ans ;
+            }
+            System.out.println(ans);
+        }
+    }
+    
+    
+}
