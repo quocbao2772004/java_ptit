@@ -1,0 +1,36 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
+public class Main 
+{
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        int test = sc.nextInt();
+        sc.nextLine();
+        Map<String, Integer> mp = new HashMap<>();
+        while(test --> 0)
+        {
+            String name = sc.nextLine();
+            name = name.trim();
+            name = name.toLowerCase();
+            String[] s = name.split("\\s+");
+            String email = s[s.length-1];
+            for(int i = 0; i<s.length-1; i++)
+            {
+                email = email + s[i].charAt(0);
+            }
+            
+            mp.put(email, mp.getOrDefault(email, 0) + 1);
+            if(mp.get(email)>1)
+            {
+                email = email + String.valueOf(mp.get(email));
+            }
+            email = email + "@ptit.edu.vn";
+            System.out.println(email);
+        }
+    }
+    
+}
