@@ -1,0 +1,50 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    public static class Student
+    {
+        private String Class, name, id, dob;
+        private float gpa;
+        public Student(String name, String id, String dob, float gpa)
+        {
+            this.Class = "B20DCCN001";
+            this.name = name;
+            this.id = id;
+            this.dob = dob;
+            this.gpa = gpa;
+        }
+        public void result()
+        {
+            String[] new_dob = this.dob.split("/");
+            for(int i = 0; i<=new_dob.length - 1; i++)
+            {
+                String c = new_dob[i];
+                while(c.length()<2)
+                {
+                    c = "0" + c;
+                }
+                new_dob[i] = c;
+            }
+            this.dob = new_dob[0] + "/" + new_dob[1] + "/" + new_dob[2];
+            System.out.printf("%s %s %s %s %.2f", this.Class, this.name, this.id, this.dob, this.gpa);
+        }
+        
+    }
+    public static Scanner sc = new Scanner(System.in);
+    
+     public static void main(String[] args) throws IOException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Student s = new Student(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextFloat());
+        s.result();
+    }
+    
+    
+    
+}
