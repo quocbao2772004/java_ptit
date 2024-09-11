@@ -1,0 +1,43 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    
+    public static Scanner sc = new Scanner(System.in);
+    
+     public static void main(String[] args) throws IOException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        int n = sc.nextInt();
+        List<List<Integer>> graph = new ArrayList<>();
+        for(int i=1;i<=n+1;i++)
+        {
+            graph.add(new ArrayList<>());
+        }
+        for(int i=1;i<n;i++)
+        {
+            int u = sc.nextInt(), v = sc.nextInt();
+            graph.get(u).add(v);
+            graph.get(v).add(u);
+        }
+        int count1 = 0, count2 = 0;
+        for(int i=1;i<=n;i++)
+        {
+            if(graph.get(i).size() == n-1) count1 += 1;
+            if(graph.get(i).size() == 1) count2 += 1;
+        }
+        if(count1 == 1 && count2 == n-1)
+        {
+            System.out.println("Yes");
+        }
+        else System.out.println("No");
+    }
+    
+    
+    
+}
