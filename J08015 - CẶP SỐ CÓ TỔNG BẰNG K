@@ -1,0 +1,41 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    
+    public static Scanner sc = new Scanner(System.in);
+    
+     public static void main(String[] args) throws IOException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        int test = sc.nextInt();
+        while(test --> 0)
+        {
+            int n = sc.nextInt();
+            Long k = sc.nextLong();
+            Map<Long, Integer> mp = new HashMap<>();
+            for(int i = 1; i<=n;i++)
+            {
+                Long x = sc.nextLong();
+                mp.put(x, mp.getOrDefault(x, 0) + 1);
+            }
+            long count = 0;
+            for(long i: mp.keySet())
+                if(mp.containsKey(k-i))
+            {
+                if(i != k-i) count = count + (long) mp.get(i) * mp.get(k-i);
+                else count = count + (long) (mp.get(i)-1) * mp.get(i);
+
+            }
+            System.out.println(count/2);        
+        }
+    }
+    
+    
+    
+}
