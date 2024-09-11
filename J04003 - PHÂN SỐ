@@ -1,0 +1,35 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
+public class Hihii 
+{   
+    public static long gcd(long a, long b)
+    {
+        if(b == 0)return a;
+        return gcd(b, a%b);
+    }
+    public static class Fraction
+    {
+        private long numerator, denominator;
+        public Fraction(long numerator, long denominator)
+        {
+            this.numerator = numerator;
+            this.denominator = denominator;
+        }
+        public void simplest_form()
+        {
+            long ucln = gcd(this.numerator, this.denominator);
+            System.out.printf("%d/%d", this.numerator/ucln, this.denominator/ucln);
+        }
+    }
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        Fraction f = new Fraction(sc.nextLong(), sc.nextLong());
+        f.simplest_form();
+//        System.out.println(gcd(3,6));
+    }
+    
+    
+}
