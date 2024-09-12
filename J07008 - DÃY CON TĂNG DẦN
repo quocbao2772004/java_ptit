@@ -1,0 +1,72 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    public static int[] x = new int [25];
+    static Vector<String> vt = new Vector<String>();
+    public static void Try(int i, int n, int[] a)
+    {
+        for(int j=0;j<=1;j++)
+        {
+            x[i]=j;
+            if(i==n)
+            {
+                int count = 0;
+                int save = -1;
+                boolean ok = true;
+                for(int k=1;k<=n;k++)
+                {
+                    if(x[k] == 1)
+                    {
+                        
+                        if(count != 0 && save >= a[k])
+                        {
+                            ok = false;
+                            break;
+                        }
+                        
+                        count += 1;
+                        save = a[k];
+                    }
+                }
+                if(count >= 2 && ok == true)
+                {
+                    String ans = "";
+                    for(int k=1;k<=n;k++)
+                        if(x[k] == 1)
+                    {
+                        ans = ans + String.valueOf(a[k]) + " ";
+                    }
+                    vt.add(ans);
+                }
+            }
+            else
+                Try(i+1, n, a);
+        }
+    }
+    // public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+        Scanner sc = new Scanner(new File("DAYSO.in"));
+        int n = sc.nextInt();
+        int[] a = new int[n+1];
+        for(int i=1;i<=n;i++)
+        {
+            a[i]=sc.nextInt();
+        }
+        Try(1,n,a);
+        Collections.sort(vt);
+        for(String i: vt)
+        {
+            System.out.println(i);
+        }
+    }
+    
+    
+    
+}
