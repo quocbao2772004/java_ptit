@@ -1,0 +1,25 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    public static void main(String[] args) throws FileNotFoundException, IOException 
+    {
+        DataInputStream inp = new DataInputStream(new FileInputStream("DATA.IN"));
+        TreeMap<Integer,Integer> map = new TreeMap<>();
+        int t = 100000;
+        while(t-->0)
+        {
+            int val = inp.readInt();
+            map.put(val, map.containsKey(val)?map.get(val)+1:1);
+        }
+        for (Map.Entry<Integer,Integer> entry:map.entrySet()) 
+        {
+            System.out.println(entry.getKey()+" "+entry.getValue());
+        }
+    }
+}
