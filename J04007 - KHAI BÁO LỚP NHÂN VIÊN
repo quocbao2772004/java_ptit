@@ -1,0 +1,39 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    
+    public static class Employee
+    {
+        private String name, id, gender, dob, address, tax_code, signing_date;
+        public Employee(String name, String gender, String dob, String address, String tax_code, String signing_date)
+        {
+            this.id = "00001";
+            this.name = name;
+            this.gender = gender;
+            this.dob = dob;
+            this.address = address;
+            this.tax_code = tax_code;
+            this.signing_date = signing_date;
+        }
+        public void get_information()
+        {
+            System.out.printf("%s %s %s %s %s %s %s", this.id, this.name, this.gender, this.dob, this.address, this.tax_code, this.signing_date);
+        }
+    }
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Employee e = new Employee(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine());
+        e.get_information();
+    }
+    
+    
+    
+}
