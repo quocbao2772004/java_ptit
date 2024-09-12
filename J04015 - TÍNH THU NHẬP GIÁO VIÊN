@@ -1,0 +1,52 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    public static class Salary
+    {
+        private String id, name;
+        private long basic_salary;
+        public Salary(String id, String name, long basic_salary)
+        {
+            this.id = id;
+            this.name = name;
+            this.basic_salary = basic_salary;
+        }
+        public int get_salary_level()
+        {
+            return Integer.parseInt(this.id.substring(2, 4));
+        }
+        public long get_allowance()
+        {
+            String position  = this.id.substring(0, 2);
+            if(position.equals("HT")) return 2000000;
+            if(position.equals("HP")) return 900000;
+            return 500000;
+        }
+        
+        public long get_salary()
+        {
+            return this.basic_salary * this.get_salary_level() + this.get_allowance();
+        }
+        public void ans()
+        {
+            System.out.printf("%s %s %d %d %d\n", this.id, this.name, this.get_salary_level(), this.get_allowance(), this.get_salary());
+        }
+    }
+    
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Salary s = new Salary(sc.nextLine(), sc.nextLine(), sc.nextInt());
+        s.ans();
+    }
+    
+    
+    
+}
