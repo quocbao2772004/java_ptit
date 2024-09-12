@@ -1,0 +1,34 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Main 
+{
+    // public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+        Scanner sc = new Scanner(new File("VANBAN.in"));
+        Set<String>s = new HashSet<>();
+        
+        while(sc.hasNextLine())
+        {
+            String[]word = sc.nextLine().toLowerCase().trim().split("\\s+");
+            for(String i: word)
+            {
+                s.add(i);
+            }
+        }
+        List<String>l = new ArrayList<>(s);
+        Collections.sort(l);
+        for(String i:l)
+        {
+            System.out.println(i);
+        }
+    }
+    
+    
+    
+}
