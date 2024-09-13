@@ -1,0 +1,53 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Hihii 
+{
+    public static class Subject implements Comparable<Subject>
+    {
+        private String id, name, credits;
+        public Subject(String id, String name, String credits)
+        {
+            this.id = id;
+            this.name = name;
+            this.credits = credits;
+        }
+        @Override
+        public int compareTo(Subject s)
+        {
+            return this.name.compareTo(s.name);
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s", this.id, this.name, this.credits);
+        }
+    }
+    
+            
+//    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+        Scanner sc = new Scanner(new File("MONHOC.in"));
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        int n = sc.nextInt();
+        sc.nextLine();
+        ArrayList<Subject>arl = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {
+            arl.add(new Subject(sc.nextLine(), sc.nextLine(), sc.nextLine()));
+        }
+        Collections.sort(arl);
+        for(Subject i:arl)
+        {
+            System.out.println(i);
+        }
+    }
+    
+    
+    
+}
