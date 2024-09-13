@@ -1,0 +1,41 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Hihii 
+{     
+    
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException, IOException
+    {
+//        Scanner sc = new Scanner(new File("MONHOC.in"));
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        int test = sc.nextInt();
+        
+        while(test -- > 0)
+        {
+            String s = sc.next();
+            BigInteger t = BigInteger.ONE;
+            int sum =0;
+            for(int i=0;i<=s.length()-1;i++)
+            {
+                if(i%2==0)
+                {
+                    if(s.charAt(i)!='0')
+                    t = t.multiply(BigInteger.valueOf(s.charAt(i) - '0'));
+                }
+                else
+                {
+                    sum = sum + (s.charAt(i) - '0');
+                }
+            }
+            System.out.print(t+" "+sum+"\n");
+        }
+    }
+    
+    
+    
+}
