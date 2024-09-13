@@ -1,0 +1,45 @@
+import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+public class Hihii 
+{   
+    public static class Business implements Comparable <Business>
+    {
+        private String id, name, slots;
+        public Business(String id, String name, String slots)
+        {
+            this.id = id;
+            this.name = name;
+            this.slots = slots;
+        }
+        @Override
+        public int compareTo(Business a)
+        {
+            return this.id.compareTo(a.id);
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s", this.id, this.name, this.slots);
+        }
+    }
+    // public static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) throws FileNotFoundException 
+    {
+        Scanner sc = new Scanner(new File("DN.in"));
+        int n = sc.nextInt();
+        ArrayList<Business> arl = new ArrayList<>();
+        sc.nextLine();
+        for(int i=1;i<=n;i++)
+        {
+            arl.add(new Business(sc.nextLine(), sc.nextLine(), sc.nextLine()));
+        }
+        Collections.sort(arl);
+        for(Business i: arl)
+        {
+            System.out.println(i);
+        }
+    }
+    
+}
