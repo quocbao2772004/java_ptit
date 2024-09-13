@@ -1,0 +1,45 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Hihii 
+{
+    public static boolean check(String s)
+    {
+        for(int i=0;i<=s.length()-1;i++)
+            if(!Character.isDigit(s.charAt(i)))
+                return false;
+        return true;
+    }
+//    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+        Scanner sc = new Scanner(new File("DATA.in"));
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        
+        Vector<String>vt = new Vector<>();
+        while(sc.hasNextLine())
+        {
+            String[] set = sc.nextLine().trim().split("\\s+");
+            for(String i: set)
+            {
+                if(i.length()<11 && i.matches("[0-9]+"))
+                {
+                   continue;
+                }
+                vt.add(i);
+            }
+        }
+        Collections.sort(vt);
+        for(String i: vt)
+        {
+            System.out.printf("%s ", i);
+        }
+    }
+    
+    
+    
+}
