@@ -1,0 +1,79 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Hihii 
+{
+    public static class Point
+    {
+        private double x, y;
+        public Point()
+        {
+            
+        }
+        public Point(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+        }
+        public Point(Point P)
+        {
+            this.x = P.x;
+            this.y = P.y;
+        }
+        public double getX()
+        {
+            return this.x;
+        }
+        public double getY()
+        {
+            return this.y;
+        }
+        public double distance(Point secondPoint)
+        {
+            return Math.sqrt((this.x - secondPoint.x) * (this.x - secondPoint.x) + (this.y - secondPoint.y) * (this.y - secondPoint.y));
+        }
+        public double distance(Point p1, Point p2)
+        {
+            return p1.distance(p2);
+        }
+        public double Area(Point p2, Point p3)
+        {
+            double a = this.distance(p2);
+            double b = p2.distance(p3);
+            double c = p3.distance(this);
+            double area = Math.sqrt((a + b + c) * (a + b - c ) * (-a + b + c) * (a - b + c)) * 1/4;
+            return area;
+        }
+    }   
+    
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        int test = sc.nextInt();
+        while(test --> 0)
+        {
+            Point p1 = new Point(sc.nextDouble(),sc.nextDouble());
+            Point p2 = new Point(sc.nextDouble(), sc.nextDouble());
+            Point p3 = new Point(sc.nextDouble(), sc.nextDouble());
+            double edge1 = p1.distance(p2);
+            double edge2 = p2.distance(p3);
+            double edge3 = p3.distance(p1);
+            if((edge1 + edge2 <= edge3) || (edge1 + edge3 <= edge2) || (edge2+ edge3 <=edge1))
+            {
+                System.out.println("INVALID");
+            }
+            else
+            {
+                System.out.printf("%.2f\n", p1.Area(p2, p3));
+            }
+        }
+    }
+    
+    
+    
+}
