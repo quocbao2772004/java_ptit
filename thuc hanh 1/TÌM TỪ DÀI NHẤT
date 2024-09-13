@@ -1,0 +1,34 @@
+import java.util.Scanner;
+import java.io.File;
+import java.io.*;
+import java.util.*;
+import java.math.*;
+
+
+public class Hihii 
+{     
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException, IOException
+    {
+//        Scanner sc = new Scanner(new File("MONHOC.in"));
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        int save_len = 0;
+        String save_word = "";
+        while(sc.hasNextLine())
+        {
+            String[] words = sc.nextLine().trim().split("\\s+");
+            for(String i: words)
+            {
+                if(save_len<i.length())
+                {
+                    save_len = i.length();
+                    save_word = i;
+                }
+            }
+        }
+        System.out.printf("%s - %d", save_word, save_len);
+    }
+    
+    
+    
+}
