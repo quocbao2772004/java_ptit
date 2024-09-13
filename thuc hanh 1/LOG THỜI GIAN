@@ -1,0 +1,80 @@
+import java.util.*;
+import java.io.*;
+
+public class Hihii 
+{
+
+    public static boolean check(char c) 
+    {
+        return c >= '0' && c <= '9';
+    }
+
+    public static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) throws FileNotFoundException, IOException 
+    {
+        
+        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        List<String> res = new ArrayList<>();
+        Set<String> uniqueTimes = new HashSet<>(); 
+        
+        while (sc.hasNextLine()) 
+        {
+            String[] words = sc.nextLine().trim().split("[\\s.,]+"); 
+            
+            for (String i : words) 
+            {
+                List<Integer> colons = new ArrayList<>();
+                for (int j = 0; j < i.length(); j++) 
+                {
+                    if (i.charAt(j) == ':') 
+                    {
+                        colons.add(j);
+                    }
+                }
+                
+                if (colons.size() == 2) 
+                {
+                    int index1 = colons.get(0);
+                    int index2 = colons.get(1);
+                    
+                    if (index1 - 2 >= 0 && index2 + 2 < i.length()) 
+                    {
+                        if (check(i.charAt(index1 + 1)) && check(i.charAt(index2 - 1)) &&
+                            check(i.charAt(index1 - 2)) && check(i.charAt(index1 - 1)) &&
+                            check(i.charAt(index2 + 1)) && check(i.charAt(index2 + 2))) {
+
+                            int h1 = i.charAt(index1 - 2) - '0';
+                            int h2 = i.charAt(index1 - 1) - '0';
+                            int m1 = i.charAt(index1 + 1) - '0';
+                            int m2 = i.charAt(index2 - 1) - '0';
+                            int s1 = i.charAt(index2 + 1) - '0';
+                            int s2 = i.charAt(index2 + 2) - '0';
+
+                            int hour = h1 * 10 + h2;
+                            int minute = m1 * 10 + m2;
+                            int second = s1 * 10 + s2;
+
+                            if (hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59 && second >= 0 && second <= 59) {
+                                String time = i.substring(index1 - 2, index2 + 3);
+                                res.add(time);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        Collections.sort(res);
+        
+        
+        for (String time : res) 
+        {
+            if (uniqueTimes.add(time)) 
+            {
+                System.out.println(time);
+            }
+        }
+    }
+}
