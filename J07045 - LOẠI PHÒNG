@@ -1,0 +1,49 @@
+ import java.util.*;
+import java.io.*;
+import java.io.FileNotFoundException;
+public class Hihii 
+{   
+    public static class LoaiPhong implements Comparable <LoaiPhong>
+    {
+        private String symbol, type, daily_price, service_fee;
+        public LoaiPhong(String in)
+        {
+            String [] words =  in.trim().split("\\s+");
+            String symbol = words[0], type = words[1], daily_price = words[2], service_fee = words[3]; 
+            this.symbol = symbol;
+            this.type = type;
+            this.daily_price = daily_price;
+            this.service_fee = service_fee;
+        }
+        @Override
+        public int compareTo(LoaiPhong a)
+        {
+            return this.type.compareTo(a.type);
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s %s", this.symbol, this.type, this.daily_price, this.service_fee);
+        }
+    }
+//    public static Scanner sc = new Scanner(System.in);
+    
+    public static void main(String[] args) throws IOException 
+    {
+        ArrayList<LoaiPhong> ds = new ArrayList<>();
+        // Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(new File("PHONG.in"));
+        int n = Integer.parseInt(in.nextLine());
+        while(n-->0){
+            ds.add(new LoaiPhong(in.nextLine()));
+        }
+        Collections.sort(ds);
+        for(LoaiPhong tmp : ds){
+            System.out.println(tmp);
+        }
+    }
+   
+    
+   
+    
+}
