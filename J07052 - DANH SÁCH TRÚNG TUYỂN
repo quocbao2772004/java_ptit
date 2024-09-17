@@ -1,0 +1,98 @@
+import java.io.FileNotFoundException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.io.File;
+public class Main 
+{
+    public static Map<Character, Double> priority_score = new HashMap<>();
+    public static void set_priority_score()
+    {
+        priority_score.put('1', 0.5);
+        priority_score.put('2', 1.0);
+        priority_score.put('3', 2.5);
+    }
+   
+    public static String format_name(String s)
+    {
+        String[] words = s.toLowerCase().trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(String word: words)
+        {
+            sb.append(word.substring(0,1).toUpperCase() + word.substring(1, word.length()));
+            sb.append(" ");
+        }
+        return sb.toString().trim();
+    }
+    public static boolean isRound(Double x)
+    {
+        return Math.abs(x - Math.round(x)) < 1e-9;
+    }
+    public static class Candidate implements Comparable<Candidate>
+    {
+        private String id, name;
+        private double math_score, physic_score, chemistry_score;
+        public Candidate(String id, String name, double math_score, double physic_score, double chemistry_score)
+        {
+            this.id = id;
+            this.name = name;
+            this.math_score = math_score;
+            this.physic_score = physic_score;
+            this.chemistry_score = chemistry_score;
+            this.set_standard_format();
+        }
+        public void set_standard_format()
+        {
+            this.name = format_name(this.name);
+        }
+        public double get_priority_score()
+        {
+            return priority_score.get(this.id.charAt(2));
+        }
+        public Double get_total_score()
+        {
+            return this.math_score * 2 + this.physic_score + this.chemistry_score + this.get_priority_score();
+        }
+        @Override
+        public int compareTo(Candidate o)
+        {
+            return Double.compare(o.get_total_score(), this.get_total_score());
+        }
+        @Override
+        public String toString()
+        {
+            String PriorityScore = isRound(this.get_priority_score()) ? String.format("%.0f", this.get_priority_score()) : String.format("%.1f", this.get_priority_score());
+            String TotalScore = isRound(this.get_total_score()) ? String.format("%.0f", this.get_total_score()) : String.format("%.1f", this.get_total_score());
+            return String.format("%s %s %s %s", this.id, this.name, PriorityScore, TotalScore);
+        }
+    }
+            
+    
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Scanner sc = new Scanner(new File("THISINH.in"));
+        // Scanner sc = new Scanner(System.in);
+        set_priority_score();
+        int n = sc.nextInt();
+        sc.nextLine();
+        ArrayList<Candidate> arl = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {    
+            arl.add(new Candidate(sc.nextLine(), sc.nextLine(), Double.valueOf(sc.nextLine()), Double.valueOf(sc.nextLine()), Double.valueOf(sc.nextLine())));
+        }
+        int quota = Integer.valueOf(sc.nextLine());
+        Collections.sort(arl);
+        double cutoff_score = arl.get(quota-1).get_total_score();
+        System.out.println(String.format("%.1f", cutoff_score));
+        for(Candidate candidate: arl)
+        {
+            if(candidate.get_total_score() >= cutoff_score)
+            {
+                System.out.println(candidate + " TRUNG TUYEN");
+            }
+            else System.out.println(candidate + " TRUOT");
+        }
+    }
+}
