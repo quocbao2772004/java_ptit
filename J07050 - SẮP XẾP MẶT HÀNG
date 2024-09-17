@@ -1,0 +1,56 @@
+import java.io.FileNotFoundException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.io.File;
+public class Main 
+{
+    public static class Product implements Comparable<Product>
+    {
+        private String id, name, group;
+        private double purchase_price, selling_price;
+        public Product(String id, String name, String group, double purchase_price, double selling_price)
+        {
+            this.id = id;
+            this.name = name;
+            this.group = group;
+            this.purchase_price = purchase_price;
+            this.selling_price = selling_price;
+        }
+        public double get_profit()
+        {
+            return this.selling_price - this.purchase_price;
+        }
+        @Override
+        public int compareTo(Product o)
+        {
+            return Double.compare(o.get_profit(), this.get_profit());
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s %.2f", this.id, this.name, this.group, this.get_profit());
+        }
+    }
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Scanner sc = new Scanner(new File("MATHANG.in"));
+        // Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        ArrayList<Product> arl = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {
+            String id="MH";
+            id = i<10? id+"0"+String.valueOf(i) : id + String.valueOf(i);
+            arl.add(new Product(id, sc.nextLine(), sc.nextLine(), Double.valueOf(sc.nextLine()), Double.valueOf(sc.nextLine())));
+        }
+        Collections.sort(arl);
+        for(Product i: arl)
+        {
+            System.out.println(i);
+        }
+    }
+}
