@@ -1,0 +1,57 @@
+import java.io.FileNotFoundException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.io.File;
+public class Main 
+{
+    public static class Customer implements Comparable<Customer>
+    {
+        private String id,name, room_id, start, end;
+        private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        public Customer(String id, String name, String room_id, String start, String end)
+        {
+            this.id = id;
+            this.name = name;
+            this.room_id = room_id;
+            this.start = start;
+            this.end = end;
+        }
+        public long calc_days()
+        {
+            return ChronoUnit.DAYS.between(LocalDate.parse(this.start, formatter), LocalDate.parse(this.end, formatter));
+        }
+        @Override
+        public int compareTo(Customer o)
+        {
+            return Long.compare(this.calc_days(), o.calc_days());
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s %s", this.id, this.name, this.room_id, this.calc_days());
+        }
+
+    }
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Scanner sc = new Scanner(new File("KHACH.in"));
+        // Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        ArrayList<Customer> arl = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {
+            String id = "KH";
+            id = i<10? id + "0"+ String.valueOf(i) : id+String.valueOf(i);
+            arl.add(new Customer(id, sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
+        }
+        Collections.sort(arl, Collections.reverseOrder());
+        for(Customer i: arl)
+        {
+            System.out.println(i);
+        }
+    }
+}
