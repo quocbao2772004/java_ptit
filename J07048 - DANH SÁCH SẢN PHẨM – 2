@@ -1,0 +1,50 @@
+import java.io.FileNotFoundException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.io.File;
+public class Main 
+{
+    public static class Product implements Comparable<Product>
+    {
+        private String id, name, price, guarantee;
+        public Product(String id, String name, String price, String guarantee)
+        {
+            this.id = id;
+            this.name = name;
+            this.price = price;
+            this.guarantee = guarantee;
+        }
+        @Override
+        public int compareTo(Product o)
+        {
+            if (Long.valueOf(this.price) == Long.valueOf(o.price)) return o.id.compareTo(this.id);
+            return Long.compare(Long.valueOf(this.price), Long.valueOf(o.price));
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s %s", this.id, this.name, this.price, this.guarantee);
+        }
+    }
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Scanner sc = new Scanner(new File("SANPHAM.in"));
+        // Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.nextLine();
+        ArrayList<Product> arl = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {
+            
+            arl.add(new Product(sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine()));
+        }
+        Collections.sort(arl, Collections.reverseOrder());
+        for(Product i: arl)
+        {
+            System.out.println(i);
+        }
+    }
+}
