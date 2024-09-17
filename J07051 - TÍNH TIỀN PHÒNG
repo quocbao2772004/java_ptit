@@ -1,0 +1,106 @@
+import java.io.FileNotFoundException;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.io.File;
+public class Main 
+{
+    public static Map<Character, Integer> floor_price = new HashMap<>();
+    public static void set_price()
+    {
+        floor_price.put('1', 25);
+        floor_price.put('2', 34);
+        floor_price.put('3', 50);
+        floor_price.put('4', 80);
+    }
+    public static String format_date(String s)
+    {
+        String[] set = s.split("/");
+        StringBuilder sb = new StringBuilder();
+        sb.append(set[0].length()<2 ? "0" + set[0] : set[0]);
+        sb.append("/");
+        sb.append(set[1].length()<2 ? "0" + set[1]: set[1]);
+        sb.append("/");
+        sb.append(set[2]);
+        return sb.toString().trim();
+    }
+    public static String format_name(String s)
+    {
+        String[] words = s.toLowerCase().trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(String word: words)
+        {
+            sb.append(word.substring(0,1).toUpperCase() + word.substring(1, word.length()));
+            sb.append(" ");
+        }
+        return sb.toString().trim();
+    }
+    public static class Room implements Comparable<Room>
+    {
+        private String id, name, room_number, start, end;
+        private int service_charges;
+        public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        public Room(String id, String name, String room_number, String start, String end, int service_charges)
+        {
+            this.id = id;
+            this.name = name;
+            this.room_number = room_number;
+            this.start = start;
+            this.end = end;
+            this.service_charges = service_charges;
+            this.standard_format();
+        }
+        public void standard_format()
+        {
+            this.name = format_name(this.name);
+            this.start = format_date(this.start);
+            this.end = format_date(this.end);
+        }
+        public int get_price()
+        {
+            return floor_price.get(this.room_number.charAt(0));
+        }
+        public int get_days()
+        {
+            
+            return (int) ChronoUnit.DAYS.between(LocalDate.parse(start, formatter), LocalDate.parse(end, formatter)) + 1;
+        }
+        public int get_total_price()
+        {
+            return this.get_days() * this.get_price() + this.service_charges;
+        }
+        @Override
+        public int compareTo(Room o)
+        {
+            return Integer.compare(o.get_total_price(), this.get_total_price());
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s %d %d", this.id, this.name, this.room_number, this.get_days(), this.get_total_price());
+        }
+            
+    }
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("/home/quoc-bao/code/java/main/src/main.txt"));
+        Scanner sc = new Scanner(new File("KHACHHANG.in"));
+        // Scanner sc = new Scanner(System.in);
+        set_price();
+        int n = sc.nextInt();
+        sc.nextLine();
+        ArrayList<Room> arl = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {
+            String id = "KH";
+            id = i < 10 ? id + "0" + String.valueOf(i) : id + String.valueOf(i);
+            arl.add(new Room(id, sc.nextLine(), sc.nextLine(), sc.nextLine(), sc.nextLine(), Integer.parseInt(sc.nextLine())));
+        }
+        Collections.sort(arl);
+        for(Room i: arl)
+        {
+            System.out.println(i);
+        }
+    }
+}
