@@ -1,0 +1,78 @@
+import java.util.*;
+import java.io.*;
+public class Hihii
+{
+    public static String format_name(String s)
+    {
+        String[] words = s.toLowerCase().trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(String i: words)
+        {
+            sb.append(i.substring(0, 1).toUpperCase() + i.substring(1, i.length()));
+            sb.append(" ");
+        }
+        return sb.toString().trim();
+    }
+    public static class ScoreBoard implements Comparable<ScoreBoard>
+    {
+        private String id, name;
+        private int sub1, sub2, sub3;
+        public ScoreBoard(String id, String name, int sub1, int sub2, int sub3)
+        {
+            this.id = id;
+            this.name = name;
+            this.sub1 = sub1;
+            this.sub2 = sub2;
+            this.sub3 = sub3;
+            this.standard_format();
+        }
+        public void standard_format()
+        {
+            this.name = format_name(this.name);
+        }
+        public String averange_score()
+        {
+            return String.format("%.2f",(double)(this.sub1 * 0.25 + this.sub2 * 0.35 + this.sub3 * 0.4));
+        }
+        public String classification()
+        {
+            double c = Double.valueOf(this.averange_score());
+            if(c>=8)return "GIOI";
+            if(c>=6.5 && c<8)return "KHA";
+            if(c>=5 && c<6.5)return "TRUNG BINH";
+            return "KEM";
+        }
+        @Override
+        public int compareTo(ScoreBoard o)
+        {
+            if(this.averange_score().equals(o.averange_score()))
+                return this.id.compareTo(o.id);
+            return o.averange_score().compareTo(this.averange_score());
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s %s", this.id, this.name, this.averange_score(), this.classification());
+        }
+    }
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        Scanner sc = new Scanner(new File("BANGDIEM.in"));
+        int n = sc.nextInt();
+        ArrayList<ScoreBoard> arl = new ArrayList<>();
+        sc.nextLine();
+        for(int i=1;i<=n;i++)
+        {
+            String id = "SV";
+            id = i < 10 ? id + "0" + String.valueOf(i) : id + String.valueOf(i);            
+            arl.add(new ScoreBoard(id, sc.nextLine(), Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine()), Integer.parseInt(sc.nextLine())));       
+        }
+        Collections.sort(arl);
+        for(ScoreBoard i: arl)
+        {
+            System.out.println(i);
+        }
+    }
+}
