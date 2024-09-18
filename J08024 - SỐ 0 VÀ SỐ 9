@@ -1,0 +1,30 @@
+import java.util.*;
+import java.io.*;
+public class Hihii
+{
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+//        Scanner sc = new Scanner(new File("DANHSACH.in"));
+        int test = sc.nextInt();
+        while(test-- >0)
+        {
+            int n = sc.nextInt();
+            Queue<String> q = new LinkedList<>();
+            q.offer("9");
+            while(true)
+            {
+                String top = q.peek();
+                q.poll();
+                if(Integer.valueOf(top)%n==0)
+                {
+                    System.out.println(top);
+                    break;
+                }               
+                q.offer(top + "0");
+                q.offer(top + "9");
+            }
+        }
+    }
+}
