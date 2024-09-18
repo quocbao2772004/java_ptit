@@ -1,0 +1,45 @@
+import java.util.*;
+import java.io.*;
+public class Hihii
+{
+    public static class Time implements Comparable<Time>
+    {
+        private long h,m,s;
+        public Time(long h, long m, long s)
+        {
+            this.h = h;
+            this.m = m;
+            this.s = s;
+        }
+        public long calc()
+        {
+            return this.h * 3600 + this.m * 60 + this.s;
+        }
+        @Override
+        public int compareTo(Time o)
+        {
+            return Long.compare(this.calc(), o.calc());
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%d %d %d", this.h, this.m, this.s);
+        }
+    }
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        int n = sc.nextInt();
+        ArrayList<Time> arl = new ArrayList<>();
+        for(int i=1;i<=n;i++)
+        {
+            arl.add(new Time(sc.nextLong(), sc.nextLong(), sc.nextLong()));
+        }
+        Collections.sort(arl);
+        for(Time i: arl)
+        {
+            System.out.println(i);
+        }
+    }
+}
