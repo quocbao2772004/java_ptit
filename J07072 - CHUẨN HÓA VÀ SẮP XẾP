@@ -1,0 +1,57 @@
+import java.util.*;
+import java.io.*;
+public class Hihii
+{
+    public static String format_name(String s)
+    {
+        String[] words = s.toLowerCase().trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(String i: words)
+        {
+            sb.append(i.substring(0, 1).toUpperCase() + i.substring(1, i.length()));
+            sb.append(" ");
+        }
+        return sb.toString().trim();
+    }
+    public static class Name implements Comparable<Name>
+    {
+        private String name;
+        public Name(String name)
+        {
+            this.name = format_name(name);
+        }
+        public String get_last_name()
+        {
+            String[] words = this.name.trim().split("\\s+");
+            return words[words.length - 1];
+        }
+        @Override
+        public int compareTo(Name o)
+        {
+            if(this.get_last_name().equals(o.get_last_name()))
+                return this.name.compareTo(o.name);
+            return this.get_last_name().compareTo(o.get_last_name());
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s", this.name);
+        }
+    }
+    public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        Scanner sc = new Scanner(new File("DANHSACH.in"));
+        ArrayList<Name> arl = new ArrayList<>();
+        while(sc.hasNextLine())
+        {
+            arl.add(new Name(sc.nextLine()));
+        }
+        Collections.sort(arl);
+        for(Name i:arl)
+        {
+            System.out.println(i);
+        }
+    }
+}
