@@ -1,0 +1,94 @@
+import java.util.*;
+import java.io.*;
+
+public class Hihii
+{
+    public static String get_infor(String s, int i)
+    {
+        String[] set = s.split("/");
+        return set[i];
+    }
+    public static class ExamList implements Comparable<ExamList>
+    {
+        private String id, date, Timee, room_id;
+        public ExamList(String id, String date, String Timee, String room_id)
+        {
+            this.id = id;
+            this.date = date;
+            this.Timee = Timee;
+            this.room_id = room_id;
+        }
+        public String getYear()
+        {
+            return get_infor(this.date, 2);
+        }
+        public String getMonth()
+        {
+            return get_infor(this.date, 1);
+        }
+        public String getDay()
+        {
+            return get_infor(this.date, 0);
+        }
+        @Override
+        public int compareTo(ExamList o)
+        {
+            if(this.getYear().equals( o.getYear()))
+            {
+                if(this.getMonth().equals(o.getMonth()))
+                {
+                    if(this.getDay().equals( o.getDay()))
+                    {
+                        if(this.Timee.equals( o.Timee))
+                        {
+                            return this.id.compareTo(o.id);
+                        }
+                        return this.Timee.compareTo(o.Timee);
+                    }
+                    return this.getDay().compareTo(o.getDay());
+                }
+                return this.getMonth().compareTo(o.getMonth());
+            }
+            return this.getYear().compareTo(o.getYear());
+        }
+        @Override
+        public String toString()
+        {
+            return String.format("%s %s %s %s", this.id, this.date, this.Timee, this.room_id);
+        }
+    }
+
+//    public static Scanner sc = new Scanner(System.in);
+
+    public static void main(String[] args) throws FileNotFoundException
+    {
+      
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        Scanner sc = new Scanner(new File("CATHI.in"));
+        
+        int n = sc.nextInt();
+        ArrayList<ExamList> arl = new ArrayList<>();
+        sc.nextLine();
+        
+        for(int i = 1; i <= n; i++)
+        {
+            String id = String.valueOf(i);
+            while(id.length()<3)
+            {
+                id = "0" + id;
+            }
+            id = "C" + id;
+            String date = sc.nextLine();
+            String Timee = sc.nextLine();
+            String room_id = sc.nextLine();
+            arl.add(new ExamList(id, date, Timee, room_id));
+        }
+
+        Collections.sort(arl);
+
+        for(ExamList c: arl)
+        {
+            System.out.println(c);
+        }
+    }
+}
