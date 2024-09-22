@@ -1,0 +1,85 @@
+import java.util.*;
+import java.io.*;
+public class Hihii
+{
+    public static String format_name(String s)
+    {
+        String[] words = s.toLowerCase().trim().split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(String i: words)
+        {
+            sb.append(i.substring(0, 1).toUpperCase() + i.substring(1, i.length()));
+            sb.append(" ");
+        }
+        return sb.toString().trim();
+    }
+    public static class Candidate implements Comparable<Candidate>
+    {
+        private String id, name, nation, area, status;
+        private double point;
+        public Candidate(String id, String name, double point, String nation, String area)
+        {
+            this.id = id;
+            this.name = format_name(name);
+            this.point = point;
+            this.nation = nation;
+            this.area = area;
+        }
+        public double priority_nation()
+        {
+            if(this.nation.toLowerCase().equals("Kinh")) return 0;
+            return 1.5;
+        }
+        public double priority_area()
+        {
+            if(this.area.equals("1")) return 1.5;
+            if(this.area.equals("2")) return 1;
+            return 0;
+        }
+        public double total_point()
+        {
+            return this.point + this.priority_nation() + this.priority_area();
+        }
+        public void get_status()
+        {
+            if(this.total_point()>=20.5) this.status = "Do";
+            else this.status = "Truot";
+        }
+        @Override
+        public int compareTo(Candidate o)
+        {
+            if(this.total_point() == o.total_point()) return this.id.compareTo(o.id);
+            return Double.compare(o.total_point(), this.total_point());
+        }
+        @Override
+        public String toString()
+        {
+            this.get_status();
+            return String.format("%s %s %.1f %s", this.id, this.name, this.total_point(), this.status);
+        }
+    }
+    // public static Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws FileNotFoundException
+    {
+//        Scanner sc = new Scanner(new File("F:\\code visual studio\\java\\hihii\\src\\hihi.txt"));
+        Scanner sc = new Scanner(new File("THISINH.in"));
+        int n = sc.nextInt();
+        ArrayList<Candidate> arl = new ArrayList<>();
+        sc.nextLine();
+        for(int i=1;i<=n;i++)
+        {
+            String id = "TS";
+            id = i < 10 ? id + "0" + String.valueOf(i) : id + String.valueOf(i);
+            String name = sc.nextLine();
+            double point = Double.valueOf(sc.nextLine());
+            String nation = sc.nextLine();
+            String area = sc.nextLine();
+            arl.add(new Candidate(id, name, point, nation, area));
+        }
+        Collections.sort(arl);
+        for(Candidate c: arl)
+        {
+            System.out.println(c);
+        }
+    }
+}
