@@ -1,0 +1,26 @@
+b1 
+121
+676
+1441
+35453
+907709
+
+b2
+@ptit.edu.vn
+
+b3
+min
+max
+sum
+
+b4
+Giao
+A-B 
+B-A
+
+b5
+0 + phone number
+
+b6
+HSD
+
