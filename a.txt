@@ -1,0 +1,88 @@
+// Giao hop tap con
+import java.util.*;
+
+public class ok
+{
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int m = sc.nextInt();
+        int[] a = new int[n];
+        int[] b = new int[m];
+        Set<Integer> set = new TreeSet<>();
+        Set<Integer> set2 = new TreeSet<>();
+        for(int i = 0; i < n; i++)
+        {
+            a[i] = sc.nextInt();
+            set.add(a[i]);
+        }
+        for(int i = 0; i < m; i++)
+        {
+            b[i] = sc.nextInt();
+            set2.add(b[i]);
+        }
+        
+        boolean ok = set.containsAll(set2); // kiem tra set2 co phai con cua set ko
+	set.retainAll(set2) // tim giao cua 2 tap set va set2
+	set.addAll(set2) // tim hop cua 2 tap set va set2
+	set.removeAll(set2) // tim cac phan tu chi co trong set ma ko co trong set2
+        System.out.println(ok);
+        ArrayList<Integer> list1 = new ArrayList<>(set);
+        
+        for(Integer i : set)
+        {
+            System.out.print(i+" ");
+        }
+
+    }
+}
+// Map
+
+Map<String, Integer> mp = new HashMap<>();
+
+mp.put("John", 1);
+
+// Kiểm tra nếu key `a` đã tồn tại
+        if (mp.containsKey(a)) {
+            // Nếu tồn tại, tăng giá trị hiện tại lên 1
+            mp.put(a, mp.get(a) + 1);
+        } else {
+            // Nếu không tồn tại, đặt giá trị ban đầu là 1
+            mp.put(a, 1);
+        }
+// mp[i]++
+mp.put(i, mp.getOrDefault(i, 0) + 1);
+
+// duyet map
+for (String key : map.keySet()) 
+{
+    System.out.println("Key: " + key + ", Value: " + map.get(key));
+}
+
+
+// Duyet Set
+Set<String> set = new HashSet<>();
+set.add("Apple");
+set.add("Banana");
+set.add("Orange");
+// Duyệt qua Set sử dụng for-each
+for (String fruit : set) {
+System.out.println(fruit);
+}
+
+// priority_queue
+PriorityQueue<String> queue = new PriorityQueue<>(new Comparator<String>(){
+            @Override
+            public int compare(String s1, String s2)
+            {
+                BigInteger b1 = new BigInteger(s1);
+                BigInteger b2 = new BigInteger(s2);
+                return b1.compareTo(b2);
+            }
+        });
+add(E e) / offer(E e): Thêm phần tử vào hàng đợi.
+peek(): Lấy phần tử có mức độ ưu tiên cao nhất mà không xóa nó khỏi hàng đợi.
+poll(): Lấy và xóa phần tử có mức độ ưu tiên cao nhất khỏi hàng đợi.
+isEmpty(): Kiểm tra xem hàng đợi có rỗng không.
+size(): Trả về số phần tử trong hàng đợi.
