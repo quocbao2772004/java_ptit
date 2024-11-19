@@ -1,0 +1,49 @@
+
+package j07029;
+import java.util.*;
+import java.io.*;
+public class J07029 
+{
+    public static void sinhtest() throws FileNotFoundException, IOException
+    {
+        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("DATA.in"));
+        int[] a = {997, 29, 23, 19, 17, 13, 11, 7, 5, 3, 2, 2,2, 2, 997, 3, 4, 6};
+        ArrayList<Integer> arl = new ArrayList<>();
+        for(int i: a)
+        {
+            arl.add(i);
+        }
+        oos.writeObject(arl);
+    }
+    
+    public static boolean snt(int n)
+    {
+        if(n<2)return false;
+        for(int i=2;i<=Math.sqrt(n);i++)
+        {
+            if(n%i==0) return false;
+        }
+        return true;
+    }
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException 
+    {
+        sinhtest();
+     
+        ObjectInputStream ois = new ObjectInputStream(new FileInputStream("DATA.in"));
+        ArrayList<Integer> arl = (ArrayList<Integer>) ois.readObject();
+        Map<Integer, Integer> mp = new TreeMap<>(Collections.reverseOrder());
+        for(int i: arl)
+        {
+            if(snt(i))
+            mp.put(i, mp.getOrDefault(i, 0)+1);
+        }
+        int count = 0;
+        for(int i: mp.keySet())
+        {
+            count += 1;
+            if(count>10)break;
+            System.out.println(i + " " + mp.get(i));
+        }
+    }
+    
+}
